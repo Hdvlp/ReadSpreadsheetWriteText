@@ -14,5 +14,20 @@ namespace ReadSpreadsheetWriteText
             string tmpPath = path ?? "";
             return Path.Combine(Path.GetDirectoryName(tmpPath), intermediateFolders, fileName);
         }
+
+        public string PreparePathToDirectory(string pathToFile, string randDirName,
+            char pathSeparator)
+        {
+            if (!File.Exists(pathToFile))
+            {
+                throw new FileNotFoundException("File does not exist.");
+            }
+
+
+            string intermediateFolders = $@"localTempCache{pathSeparator}{randDirName}";
+            string folder = Path.Combine(Path.GetDirectoryName(pathToFile), intermediateFolders);
+
+            return folder;
+        }
     }
 }
